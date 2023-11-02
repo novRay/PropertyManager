@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}编辑个人信息{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock %}
+
+{% block main %}
+
+    <h3 class="page-title">编辑个人信息</h3>
+    <form action="" method="POST">
+        <div class="user-info">
+            <div class='form-group'>
+                <label for="username" style="float:left">用户名:</label>
+                <input type="text" class="form-control" id="username" name="username" value="{{ current_user.username }}" required>
+            </div>
+            <div class='form-group'>
+                <label for="email" >邮箱:</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{ current_user.email }}" required>
+            </div>
+            <div class='form-group'>
+                <label for="real_name">真实姓名:</label>
+                <input type="text" class="form-control" id="full_name" name="full_name" value="{{ current_user.full_name }}">
+            </div>
+            <div class='form-group'>
+                <label for="sex">性别:</label>
+                <input type="radio" name="gender" value="M" id="male" {% if current_user.sex == "M" %}checked{% endif %}>
+                <label for="male">男</label>
+                <input type="radio" name="gender" value="F" id="female" {% if current_user.sex == "F" %}checked{% endif %}>
+                <label for="female">女</label>
+            </div>
+            <div class='form-group'>
+                <label for="address">住址:</label>
+                <input type="text" class="form-control" id="address" name="address" value="{{ current_user.address }}">
+            </div>
+        </div>
+        <button class="btn btn-primary edit-button">保存更改</button>
+    </form>
+
+{% endblock %}

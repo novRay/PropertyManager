@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}查看帖子{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/view_posts.css') }}">
+{% endblock %}
+
+{% block main %}
+    <ul>
+        {% for post in posts %}
+            <li>
+                <div class="avatar-group">
+                    <img src="{{ url_for('static', filename='images/default-avatar.png') }}"
+                         alt="" class="avatar">
+                </div>
+                <div class="post-group">
+                    <p class="post-title"><a href="{{ url_for('post.view_post',post_id=post.id)
+                            }}">{{ post.title }}</a></p>
+                    <p class="post-content">{{ post.content }}</p>
+                    <div class="post-info">
+                        <span class="post-user">{{ post.user.username }}</span>
+                        <span class="post-time">{{ post.created_at }}</span>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

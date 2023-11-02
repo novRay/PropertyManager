@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}个人信息-{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock %}
+
+{% block main %}
+    <h3 class="page-title">个人信息</h3>
+    <div class="user-info">
+        <p><strong>用户名:</strong> {{ current_user.username }}</p>
+        <p><strong>邮箱:</strong> {{ current_user.email }}</p>
+        <p><strong>真实姓名:</strong> {{ current_user.full_name }}</p>
+        <p><strong>性别:</strong> {{ current_user.sex }}</p>
+        <p><strong>住址:</strong> {{ current_user.address }}</p>
+    </div>
+    <a class="btn btn-primary edit-button" href="{{ url_for('user.edit_profile') }}">编辑个人信息</a>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+/* 公告栏样式 */
+.card {
+    border-radius: 15px; /* 圆角边框 */
+    margin-top: 20px; /* 顶部外边距 */
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+}
+
+.card-title {
+    font-size: 24px; /* 标题字体大小 */
+    margin-bottom: 10px; /* 底部外边距 */
+}
+
+.card-text {
+    font-size: 16px; /* 内容字体大小 */
+}
+
+.text-muted {
+    font-size: 14px; /* 发布时间字体大小 */
+    color: #888; /* 字体颜色 */
+}
