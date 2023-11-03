@@ -18,7 +18,7 @@
 
 
 
-    <h4>评论： （0）</h4>
+    <h4>评论： （{{ comment_cnt }}）</h4>
     <form action="{{ url_for('post.comment', post_id=post.id) }}" method="post">
         <div class="form-group">
             <input name="content" type="text" class="from-control" placeholder="请填写评论" required>
@@ -37,6 +37,10 @@
                             class="avatar">
                     <span class="username">{{ comment.user.username }}</span>
                     <span class="created-at">{{ comment.created_at }}</span>
+                    {% if user.is_admin %}
+                            <!-- 仅对管理员用户显示删除按钮 -->
+                            <a href="{{ url_for('post.delete_comment', comment_id=comment.id) }}">删除</a>
+                    {% endif %}
                 </div>
                 <p class="comment-content">{{ comment.content }}</p>
             </li>

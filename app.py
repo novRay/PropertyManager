@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from flask import Flask, render_template
+from flask import Flask
 from flask_login import LoginManager
 from flask_migrate import Migrate
 
@@ -8,6 +8,7 @@ import config
 from models import User
 from views.admin import admin_bp
 from views.auth import auth_bp
+from views.index import index_bp
 from views.message import message_bp
 from views.user import user_bp
 from views.post import post_bp
@@ -29,18 +30,15 @@ with app.app_context():
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "auth.login"  # 设置登录视图的端点
+login_manager.login_message = config.LOGIN_MESSAGE
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-@app.route('/')
-def hello_world():  # put application's code here
-    return render_template('index.html')
-
-
 # 注册所有blueprint
+app.register_blueprint(index_bp)
 app.register_blueprint(auth_bp)
 app.register_blueprint(admin_bp)
 app.register_blueprint(post_bp)

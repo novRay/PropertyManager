@@ -20,7 +20,7 @@ def login():
             else:
                 login_user(user)
                 flash('登录成功', 'success')
-                return redirect(url_for('user.profile'))  # Redirect to user profile page
+                return redirect(url_for('index.index'))
         else:
             flash('登录失败，请检查用户名和密码', 'error')
     return render_template('auth/login.html')

@@ -7,20 +7,6 @@
 {% block main %}
     <h3 class="page-title">登录</h3>
 
-
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="error-message-container">
-                <ul>
-                  {% for category, message in messages %}
-                    <li class="error-message">{{ message }}</li>
-                  {% endfor %}
-                </ul>
-                </div>
-            {% endif %}
-        {% endwith %}
-
-
     <form action="" method="POST">
         <div class='form-container'>
             <div class='form-group'>

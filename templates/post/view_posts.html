@@ -21,6 +21,10 @@
                     <div class="post-info">
                         <span class="post-user">{{ post.user.username }}</span>
                         <span class="post-time">{{ post.created_at }}</span>
+                        {% if user.is_admin %}
+                            <!-- 仅对管理员用户显示删除按钮 -->
+                            <a href="{{ url_for('post.delete_post', post_id=post.id) }}">删除</a>
+                        {% endif %}
                     </div>
                 </div>
             </li>

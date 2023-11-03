@@ -2,9 +2,10 @@
 import pytz
 from flask_login import UserMixin
 from datetime import datetime
+
+from config import TIME_ZONE
 from exts import db
 
-TIME_ZONE = "Asia/Shanghai"
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -12,7 +13,6 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(200), nullable=False)
     approved = db.Column(db.Boolean, default=False, nullable=False)
     is_admin = db.Column(db.Boolean, default=False, nullable=False)
-    # Add more user fields like email, name, etc. as needed
 
     email = db.Column(db.String(120), unique=True, nullable=True)
     full_name = db.Column(db.String(100), nullable=True)  # 真实姓名
@@ -50,7 +50,7 @@ class Message(db.Model):
     sent_at = db.Column(db.DateTime, default=lambda: datetime.now(pytz.timezone(TIME_ZONE)))
 
 
-class Announcement(db.Model):
+class Notice(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text, nullable=False)
