@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
     approved = db.Column(db.Boolean, default=False, nullable=False)  # 是否已批准
     is_admin = db.Column(db.Boolean, default=False, nullable=False)  # 是否是管理员
 
-    email = db.Column(db.String(120), unique=True, nullable=True)  # 邮箱
+    email = db.Column(db.String(120), nullable=True)  # 邮箱
     full_name = db.Column(db.String(100), nullable=True)  # 真实姓名
     sex = db.Column(db.String(100), nullable=True)  # 性别
     address = db.Column(db.String(200), nullable=True)  # 住址
