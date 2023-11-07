@@ -41,7 +41,6 @@ class Comment(db.Model):
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    subject = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text, nullable=False)
     sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     sender = db.relationship('User', foreign_keys=[sender_id], backref='sent_messages')
