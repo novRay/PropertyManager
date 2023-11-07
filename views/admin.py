@@ -9,9 +9,11 @@ admin_bp = Blueprint('admin', __name__)
 @admin_bp.route('/user_approval')
 @login_required
 def user_approval():
+    # 检查当前用户是否管理员
     if not current_user.is_admin:
         flash('你没有权限访问这个页面', 'error')
         return redirect(url_for('post.view_posts'))
+    # 查询未批准的用户并按ID降序排列
     unapproved_users = User.query.filter_by(approved=False).order_by(User.id.desc()).all()
     return render_template('admin/user_approval.html', unapproved_users=unapproved_users, user=current_user)
 
@@ -38,7 +40,6 @@ def publish_notice():
         new_post = Notice(title=title, content=content)
         db.session.add(new_post)
         db.session.commit()
-        # flash('通知发布成功', 'success')
         return redirect(url_for('index.index'))
     return render_template('admin/publish_notice.html', user=current_user)
 

@@ -6,6 +6,7 @@ from flask_migrate import Migrate
 
 import config
 from models import User
+from utils import create_admin_user
 from views.admin import admin_bp
 from views.auth import auth_bp
 from views.index import index_bp
@@ -37,7 +38,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-# 注册所有blueprint
+# 注册所有blueprint路由
 app.register_blueprint(index_bp)
 app.register_blueprint(auth_bp)
 app.register_blueprint(admin_bp)

@@ -45,11 +45,13 @@
               <ul class="nav navbar-nav navbar-right">
                   {% if user %}
                       <li><a href="{{ url_for('user.profile') }}">{{ user.username }}</a></li>
+                      <li><a href="{{ url_for('message.view_messages') }}">消息列表</a></li>
+                      <li><a href="{{ url_for('message.send_message') }}">发送消息</a></li>
 
                       {% if user.is_admin %}
                           <!-- 仅对管理员用户可见 -->
                           <li><a href="{{ url_for('admin.publish_notice') }}">发布通知</a></li>
-                          <li><a href="">消息列表</a></li>
+
                           <li><a href="{{ url_for('admin.user_approval') }}">审核注册</a></li>
                       {% endif %}
 

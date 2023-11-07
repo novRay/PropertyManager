@@ -14,6 +14,7 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
         user = User.query.filter_by(username=username).first()
+
         if user and check_password_hash(user.password, password):
             if not user.approved:
                 flash('账号尚未通过审核，请耐心等待', 'error')

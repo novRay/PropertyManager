@@ -16,17 +16,19 @@ def profile():
 @login_required
 def edit_profile():
     if request.method == 'POST':
+        # 从表单中获取信息
         new_email = request.form.get('email', current_user.email)
         new_full_name = request.form.get('full_name', current_user.full_name)
         new_sex = request.form.get('sex', current_user.sex)
         new_address = request.form.get('address', current_user.address)
 
+        # 设置信息
         current_user.email = new_email
         current_user.full_name = new_full_name
         current_user.sex = new_sex
         current_user.address = new_address
 
+        # 提交数据库
         db.session.commit()
-        # flash('个人信息已更新', 'success')
         return redirect(url_for('user.profile'))
     return render_template('user/edit_profile.html', user=current_user)

@@ -10,8 +10,8 @@ post_bp = Blueprint('post', __name__)
 @post_bp.route('/posts')
 @login_required
 def view_posts():
-    posts = Post.query.all()
-    posts.reverse()
+    # 查询所有帖子并按ID降序排列
+    posts = Post.query.order_by(Post.id.desc()).all()
     return render_template('post/view_posts.html', posts=posts, user=current_user)
 
 
@@ -19,8 +19,8 @@ def view_posts():
 @login_required
 def view_post(post_id):
     post = Post.query.get(post_id)
-    comments = Comment.query.filter_by(post_id=post_id).all()
-    comments.reverse()
+    # 查询当前帖子下所有评论并按ID降序排列
+    comments = Comment.query.filter_by(post_id=post_id).order_by(Comment.id.desc()).all()
     return render_template('post/view_post.html', post=post, comments=comments, comment_cnt=len(comments),
                            user=current_user)
 
@@ -34,7 +34,6 @@ def new_post():
         new_post = Post(title=title, content=content, user_id=current_user.id)
         db.session.add(new_post)
         db.session.commit()
-        # flash('通知发布成功', 'success')
         return redirect(url_for('post.view_posts'))
     return render_template('post/new_post.html', user=current_user)
 
@@ -46,7 +45,6 @@ def comment(post_id):
     new_comment = Comment(content=content, post_id=post_id, user_id=current_user.id)
     db.session.add(new_comment)
     db.session.commit()
-    # flash('回复成功', 'success')
     return redirect(url_for('post.view_post', post_id=post_id))
 
 
@@ -56,12 +54,13 @@ def delete_post(post_id):
     post = Post.query.get(post_id)
     # 只有管理员可以删帖
     if post and current_user.is_admin:
-        # 帖子下的全部评论
+        # 查询当前帖子下的全部评论
         comments = Comment.query.filter_by(post_id=post.id).all()
+
+        # 删除所有评论，再删除当前帖子
         [db.session.delete(comment) for comment in comments]
         db.session.delete(post)
         db.session.commit()
-        # flash('帖子已删除', 'success')
     else:
         flash('你没有权限删除这个帖子', 'error')
     return redirect(url_for('post.view_posts'))
@@ -76,5 +75,5 @@ def delete_comment(comment_id):
         db.session.delete(comment)
         db.session.commit()
     else:
-        pass
+        flash('你没有权限删除这个评论', 'error')
     return redirect(url_for('post.view_post', post_id=post_id))
