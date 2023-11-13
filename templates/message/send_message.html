@@ -9,7 +9,7 @@
     <form action="/send_message" method="POST">
         <div class='form-container'>
             <div class='form-group'>
-                <input type="text" class="form-control" placeholder="接收者用户名" name="receiver_name" required>
+                <input type="text" class="form-control" placeholder="接收者用户名" name="receiver_name" value="{{ receiver_name }}" required>
             </div>
             <div class='form-group'>
                 <textarea class="form-control" placeholder="输入消息" name="content" rows="5" required></textarea>

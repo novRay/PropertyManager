@@ -11,8 +11,14 @@
         {% for post in posts %}
             <li>
                 <div class="avatar-group">
-                    <img src="{{ url_for('static', filename='images/default-avatar.png') }}"
+                    {% if post.user.is_admin %}
+                        <img src="{{ url_for('static', filename='images/admin-avatar.png') }}"
                          alt="" class="avatar">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='images/default-avatar.png') }}"
+                         alt="" class="avatar">
+                    {% endif %}
+
                 </div>
                 <div class="post-group">
                     <p class="post-title"><a href="{{ url_for('post.view_post',post_id=post.id)

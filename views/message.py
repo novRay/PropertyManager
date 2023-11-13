@@ -19,6 +19,7 @@ def view_messages():
 @message_bp.route('/send_message', methods=['GET', 'POST'])
 @login_required
 def send_message():
+    receiver_name = request.args.get('receiver_name', "")
     if request.method == 'POST':
         receiver_name = request.form.get('receiver_name')
         content = request.form.get('content')
@@ -41,4 +42,4 @@ def send_message():
         flash('消息发送成功', 'success')
         return redirect(url_for('message.view_messages'))
 
-    return render_template('message/send_message.html', user=current_user)
+    return render_template('message/send_message.html', receiver_name=receiver_name, user=current_user)

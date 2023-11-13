@@ -43,6 +43,7 @@ class Comment(db.Model):
 
 
 class Message(db.Model):
+    __table_name__ = "Message"
     id = db.Column(db.Integer, primary_key=True)  # 消息ID（主键）
     content = db.Column(db.Text, nullable=False)  # 消息内容
     sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # 发送者用户ID（外键）
@@ -53,6 +54,7 @@ class Message(db.Model):
 
 
 class Notice(db.Model):
+    __table_name__ = "Notice"
     id = db.Column(db.Integer, primary_key=True)  # 公告ID（主键）
     title = db.Column(db.String(100), nullable=False)  # 公告标题
     content = db.Column(db.Text, nullable=False)  # 公告内容

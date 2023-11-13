@@ -33,8 +33,13 @@
         {% for comment in comments %}
             <li>
                 <div class="user-info">
-                    <img src="{{ url_for('static', filename='images/default-avatar.png') }}" alt=""
-                            class="avatar">
+                    {% if comment.user.is_admin %}
+                        <img src="{{ url_for('static', filename='images/admin-avatar.png') }}"
+                         alt="" class="avatar">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='images/default-avatar.png') }}"
+                         alt="" class="avatar">
+                    {% endif %}
                     <span class="username">{{ comment.user.username }}</span>
                     <span class="created-at">{{ comment.created_at }}</span>
                     {% if user.is_admin %}

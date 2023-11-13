@@ -13,6 +13,7 @@
                     <strong>发送人:</strong> {{ message.sender.username }}<br>
                     <strong>内容:</strong> {{ message.content }}<br>
                     <strong>发送时间:</strong> {{ message.sent_at }}
+                    <a href="{{ url_for('message.send_message', receiver_name=message.sender.username) }}">回复</a>
                 </li>
             {% endfor %}
         </ul>
